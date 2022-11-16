@@ -8,5 +8,6 @@ https://github.com/superg/redumper/blob/main/.github/workflows/cmake.yml
 
 TODO:
 
-add dynamic version to the generated ZIP file
-add a changelog message when the release is created
+- add dynamic version to the generated ZIP file
+
+- add a changelog message when the release is created
