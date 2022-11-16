@@ -26,11 +26,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pyyaml
-          python package.py
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Build artefact
+        run: python package.py
       - name: GH Release
         uses: softprops/action-gh-release@v0.1.14
-        if: startsWith(github.ref, 'refs/tags/')
+        #if: startsWith(github.ref, 'refs/tags/')
         with:
           files: code_release.zip
           body_path: ${{ github.workspace }}-CHANGELOG
