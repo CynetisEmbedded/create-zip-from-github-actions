@@ -34,6 +34,6 @@ jobs:
         shell: bash
         run: |
           for f in *.zip; do FILES+=" -a $f"; done
-          hub release create -m CHANGELOG.md -a $FILES
+          hub release create -m CHANGELOG.md $FILES
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
