@@ -11,8 +11,8 @@ on:
 
 env:
   build_type: Release
-  release_name: CHANGELOG.md
-  release_title: build_${{github.run_number}}
+  release_name: build_${{github.run_number}}
+  release_changelog: CHANGELOG.md
 
 jobs:
   build:
@@ -35,6 +35,6 @@ jobs:
         shell: bash
         run: |
           for f in *.zip; do FILES+=" -a $f"; done
-          hub release create ${{ env.release_name }} -m ${{ env.release_name }} $FILES
+          hub release create ${{ env.release_name }} -m ${{ env.release_changelog }} $FILES
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
