@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: ["master"]
 
+env:
+  build_type: Release
+  release_name: build_${{github.run_number}}
+
 permissions:
   contents: read
 
@@ -29,14 +33,10 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Build artefact
         run: python package.py
-      - name: GH Release
-        uses: softprops/action-gh-release@v0.1.14
-        #if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: code_release.zip
-          body_path: ${{ github.workspace }}-CHANGELOG
-          # note you'll typically need to create a personal access token
-          # with permissions to create releases in the other repo
-          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+      - name: Create release
+        shell: bash
+        run: |
+          for f in *.zip; do FILES+=" -a $f"; done
+          hub release create ${{ env.release_name }} -m ${{ env.release_name }} $FILES
         env:
-          GITHUB_REPOSITORY: CynetisEmbedded/create-zip-from-github-actions
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
