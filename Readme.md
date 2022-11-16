@@ -9,6 +9,8 @@ https://github.com/superg/redumper/blob/main/.github/workflows/cmake.yml
 
 TODO:
 
+- Make the ZIP archive recursively pack subfolders
+
 - add dynamic version to the generated ZIP file
 
 - add a changelog message when the release is created
